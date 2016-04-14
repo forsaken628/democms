@@ -10,6 +10,7 @@ require ROOT_PATH.'/config/profile.inc.php';
 
 //引入Smarty
 require ROOT_PATH.'/smarty/Smarty.class.php';
+
 //设置中国时区
 date_default_timezone_set('Asia/Shanghai');
 //自动加载类
@@ -26,4 +27,3 @@ function __autoload($_className) {
 $_tpl = TPL::getInstance(); 
 //初始化
 require 'common.inc.php';
-?>

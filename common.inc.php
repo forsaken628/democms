@@ -1,10 +1,9 @@
-<?php 
+<?php
 //模板句柄
 global $_tpl;
- 
 $_nav = new NavAction($_tpl);
 $_nav->showfront();  //列出主导航
- 
+
 /*
 if (IS_CAHCE) {
 	$_tpl->assign('header','<script type="text/javascript">getHeader();</script>');
@@ -16,12 +15,4 @@ if (IS_CAHCE) {
 	}
 }*/
 
-  
-
-
-$_tpl->assign('webname',WEBNAME);
-
-
-
-
-?>
+$_tpl->assign('webname', WEBNAME);

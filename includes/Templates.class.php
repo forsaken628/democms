@@ -114,12 +114,4 @@ class Templates {
 		//载入编译文件
 		include $_parFile;
 	}
-	
-	
-	
-	
-	
-	
-	
 }
-?>
