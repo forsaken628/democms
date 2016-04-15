@@ -19,7 +19,8 @@ class IndexAction extends Action
 
     public function _action()
     {
-        $this->_tpl->assign('name',5);
-//        var_dump($_REQUEST);
+        $index = new IndexModel();
+        $this->_tpl->assign('newslist',$index->getNewsList());
+//        $this->_tpl->assign('nav', $nav->header_nav());
     }
 }

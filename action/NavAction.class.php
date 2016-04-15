@@ -18,10 +18,5 @@ class NavAction extends Action
         $nav = new NavModel();
         $this->_tpl->assign('nav', $nav->header_nav());
     }
-
-    public function _action()
-    {
-
-    }
 }
 

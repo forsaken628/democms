@@ -1,46 +1,4 @@
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>军事动态 - 新闻系统 - CMS内容管理系统</title>
-<link rel="stylesheet" type="text/css" href="style/basic.css" />
-<link rel="stylesheet" type="text/css" href="style/list.css" />
-</head>
-<body>
-<script type="text/javascript" src="config/static.php?type=header"></script>
-<div id="top">
-	 
-</div>
-<!---
-<div id="header">
-	<h1><a href="###">新闻系统</a></h1>
-	<div class="adver"><script type="text/javascript" src="js/header_adver.js"></script></div>
-</div>  -->
-<div id="nav">
-	<ul>
-		<li><a href="./">首页</a></li>
-						<li><a href="list.php?id=1">军事动态</a></li>
-				<li><a href="list.php?id=8">热门汽车</a></li>
-				<li><a href="list.php?id=3">时尚女人</a></li>
-				<li><a href="list.php?id=4">科技频道</a></li>
-				<li><a href="list.php?id=5">智能手机</a></li>
-				<li><a href="list.php?id=7">美容护肤</a></li>
-				<li><a href="list.php?id=9">房产家居</a></li>
-				<li><a href="list.php?id=10">读书教育</a></li>
-				<li><a href="list.php?id=11">股票基金</a></li>
-					</ul>
-</div>
-<div id="search">
-	<form method="get" action="search.php">
-		<select name="type">
-			<option selected="selected" value="1">按标题</option>
-			<option value="2">按关键字</option>
-		</select>
-		<input type="text" name="inputkeyword" class="text" />
-		<input type="submit" class="submit" value="搜索" />
-	</form>
-	 
+{{include file='head.tpl'}}
 </div><div id="list">
 	<h2>当前位置 &gt; <a href="list.php?id=1">军事动态</a></h2>
 			<dl>
