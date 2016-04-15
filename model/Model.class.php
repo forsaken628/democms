@@ -2,6 +2,7 @@
 	//模型基类
 	class Model {
 		protected $_db;
+		public $limit;
 		function __construct()
 		{
 			$this->_db = DB::getDB();

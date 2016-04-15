@@ -11,8 +11,9 @@
     <title>{{$title}}</title>
 </head>
 <body>
-<div id="top">
 
+<div id="top">
+{{$header}}
 </div>
 
 <div id="nav">
