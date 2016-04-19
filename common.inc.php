@@ -1,6 +1,7 @@
 <?php
 //模板句柄
 global $_tpl;
+const COUNT_NEWS=1;
 $_tpl->debugging_ctrl = 'URL';
 $_index = new IndexAction($_tpl);
 $_index->showHeaderNav();  //列出主导航

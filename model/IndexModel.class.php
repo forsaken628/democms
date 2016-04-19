@@ -8,7 +8,10 @@
  */
 class IndexModel extends Model
 {
-    //获取首页列表
+    /**
+     * 获取首页列表
+     * @return array
+     */
     public function getIndexNews()
     {
         $sql = "SELECT c.id,c.title,c.attr,c.info,c.date,
@@ -39,33 +42,46 @@ ORDER BY n2.id,c.id DESC";
         return $newsList;
     }
 
-    //获取导航栏
+    /**
+     * 获取导航栏
+     * @return StdClass|string
+     */
     public function getHeaderNav()
     {
         $sql = "SELECT id,nav_name,nav_info FROM cms_nav WHERE pid=0 ORDER BY sort";
         return $this->all($sql);
     }
 
-    //获取栏目列表
-    public function getListNews($id)
-    {
-        $sql = "SELECT c.*,n1.pid,n1.nav_name
-FROM cms_content c
-  JOIN cms_nav n1 ON c.nav=n1.id
-WHERE n1.pid=$id OR n1.id=$id ".$this->limit;
-        var_dump($sql);
-        return $this->all($sql);
-    }
 
-    public function countListNews($id)
+    /**
+     * 获取栏目条目或数量
+     * @param int $id
+     * @param null $type
+     * @return mixed
+     */
+    public function getListNews($id, $type = null)
     {
-        $sql = "SELECT count(c.id) count
+        switch ($type) {
+            case COUNT_NEWS:
+                $sql = "SELECT count(c.id) count
 FROM cms_content c
   JOIN cms_nav n1 ON c.nav=n1.id
 WHERE n1.pid=$id OR n1.id=$id";
-        return $this->one($sql);
+                return $this->one($sql)->count;
+                break;
+            case null:
+                $sql = "SELECT c.*,n1.pid,n1.nav_name
+FROM cms_content c
+  JOIN cms_nav n1 ON c.nav=n1.id
+WHERE n1.pid=$id OR n1.id=$id " . $this->limit;
+                return $this->all($sql);
+        }
     }
 
+    /**
+     * @param int $id 栏目id
+     * @return StdClass|string
+     */
     public function getChildList($id)
     {
         $sql = "SELECT id,nav_name,nav_info
@@ -73,6 +89,10 @@ FROM cms_nav WHERE pid=$id ORDER BY sort";
         return $this->all($sql);
     }
 
+    /**
+     * @param int $id 栏目id
+     * @return StdClass|string
+     */
     public function getBreadCrumb($id)
     {
         $sql = "SELECT n2.id,n2.nav_name,n2.nav_info
@@ -80,5 +100,42 @@ FROM cms_nav n1 JOIN cms_nav n2 ON n1.pid=n2.id WHERE n1.id=$id
 UNION SELECT id,nav_name,nav_info
 FROM cms_nav WHERE id=$id";
         return $this->all($sql);
+    }
+
+    /**
+     * @param string $key 搜索词
+     * @param int $type 1标题，2关键词
+     * @return StdClass|string
+     */
+    public function search($key, $type = 1)
+    {
+        $sql = "SELECT * FROM cms_content";
+        switch ($type) {
+            case 1:
+                $sql .= " WHERE title like '%{$key}%'";
+                break;
+            case 2:
+                $sql .= " WHERE keyword like '%{$key}%'";
+        }
+        $sql .= $this->limit;
+        return $this->all($sql);
+    }
+
+    /**
+     * @param string $key 搜索词
+     * @param int $type 1标题，2关键词
+     * @return StdClass|string
+     */
+    public function countSearch($key, $type = 1)
+    {
+        $sql = "SELECT count(id) count FROM cms_content";
+        switch ($type) {
+            case 1:
+                $sql .= " WHERE title like '%{$key}%'";
+                break;
+            case 2:
+                $sql .= " WHERE keyword like '%{$key}%'";
+        }
+        return $this->one($sql);
     }
 }
