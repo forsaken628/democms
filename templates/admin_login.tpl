@@ -1,13 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>登录CMS后台管理系统</title>
-<link rel="stylesheet" type="text/css" href="../style/admin.css" />
-<script type="text/javascript" src="../js/admin_login.js"></script>
-</head>
-<body>
-
+{{include file='head.tpl'}}
 <form id="adminLogin" name="login" method="post" action="?action=login">
 	<fieldset>
 		<legend>登录CMS后台管理系统</legend>
@@ -19,9 +10,5 @@
 		<input type="submit" value="登录" class="submit" onclick="return checkLogin();" name="send" />
 	</fieldset>
 </form>
-
-
-
-
 </body>
 </html>

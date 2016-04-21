@@ -1,4 +1,5 @@
 {{include file='head.tpl'}}
+{{include file='header.tpl'}}
 <div id="newslist">
     {{foreach from=$newsList item=list}}
         <div class="list {{cycle values=",right"}} bottom">
