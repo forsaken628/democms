@@ -1,5 +1,5 @@
 function admin_top_nav(j) {
-	for (i=1;i<5;i++) {
+	for (var i=1;i<=2;i++) {
 		document.getElementById('nav'+i).style.backgroundPosition = 'left bottom';
 		document.getElementById('nav'+i).style.color = '#fff';
 	}
