@@ -24,6 +24,7 @@ function __autoload($_className) {
 	}
 } 
 //实例化模板类
-$_tpl = TPL::getInstance(); 
-//初始化
-require 'common.inc.php';
+$_tpl = TPL::getInstance();
+const COUNT_NEWS=1;
+$_tpl->debugging_ctrl = 'URL';
+$_tpl->assign('webname', WEBNAME);
