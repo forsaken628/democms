@@ -32,7 +32,7 @@
 		
 		//数据是否一致
 		static public function checkEquals($_data, $_otherdate) {
-			if (trim($_data) != trim($_otherdate)) return true;
+			if (trim($_data) == trim($_otherdate)) return true;
 			return false;
 		}
 		
@@ -44,7 +44,7 @@
 		
 		//session验证
 		static public function checkSession() {
-			if (!isset($_SESSION['admin'])) Tool::alertBack('警告：非法登录！');
+			if (!isset($_SESSION['admin'])) Tool::alertLocation('警告：非法登录！','admin_login.php');
 		}
 		
 		//权限
