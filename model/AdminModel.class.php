@@ -65,8 +65,16 @@ class AdminModel extends Model
         $sql = "SELECT c.*,n.nav_name,n.nav_info FROM cms_content c JOIN cms_nav n ON c.nav=n.id" . $where;
         return $this->all($sql);
     }
-    public function modifyAdmin(){
+
+    public function modifyAdmin($data)
+    {
+        $set = '';
+        if (isset($data['admin_pass'])) {
+            $pass = sha1($data['admin_pass']);
+            $set .= "admin_pass= \"$pass\"";
+        }
+        $sql = "UPDATE cms_content SET $set WHERE id=\"{$data['id']}\";";
+        echo $sql;
         return 1;
     }
 }
-

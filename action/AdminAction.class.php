@@ -8,7 +8,7 @@
  */
 class AdminAction extends Action
 {
-    private $_model;
+    protected $_model;
 
     public function __construct($_tpl, $_model = null)
     {
@@ -94,7 +94,9 @@ class AdminAction extends Action
                         Tool::alertLocation('操作超时', '/admin/admin.php');
                     }
                     unset($_SESSION['token_time']);
-                    if ($this->_model->modifyAdmin() == 1) {
+                    $data['id'] = intval($_POST['id']);
+                    $data['admin_pass'] = $_POST['admin_pass'];
+                    if ($this->_model->modifyAdmin($data) == 1) {
                         Tool::alertLocation('ac', $_POST['prev_url']);
                     } else {
                         Tool::alertLocation('error', $_POST['prev_url']);
