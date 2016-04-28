@@ -57,8 +57,8 @@ class AdminAction extends Action
         $this->_tpl->assign('css', ['admin']);
         $this->_tpl->assign('js', ['../js/admin_content.js','../ckeditor/ckeditor.js']);
 
-        $this->_tpl->assign('newsList',$this->_model->getNewsList($_GET['']));
-
+        $this->_tpl->assign('newsList',$this->_model->getNewsList($_GET['nav']));
+        $this->_tpl->assign('navList',$this->_model->getNavList($_GET['nav']));
         $this->_tpl->display('content.tpl');
     }
 
