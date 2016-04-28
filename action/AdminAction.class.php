@@ -55,10 +55,18 @@ class AdminAction extends Action
         Validate::checkSession();
         $this->_tpl->assign('title', 'main');
         $this->_tpl->assign('css', ['admin']);
-        $this->_tpl->assign('js', ['../js/admin_content.js','../ckeditor/ckeditor.js']);
+        $this->_tpl->assign('js', ['../js/admin_content.js', '../ckeditor/ckeditor.js']);
+        switch ($_GET['action']) {
+            default:
+            case'show':
+                $this->_tpl->assign('action', 'show');
+                $this->_tpl->assign('newsList', $this->_model->getNewsList($_GET['nav']));
+                $this->_tpl->assign('navList', $this->_model->getNavList($_GET['nav']));
+                break;
+            case 'add':
+                $this->_tpl->assign('action', 'add');
+        }
 
-        $this->_tpl->assign('newsList',$this->_model->getNewsList($_GET['nav']));
-        $this->_tpl->assign('navList',$this->_model->getNavList($_GET['nav']));
         $this->_tpl->display('content.tpl');
     }
 
@@ -70,7 +78,7 @@ class AdminAction extends Action
         $this->_tpl->assign('css', ['admin']);
         $this->_tpl->assign('js', ['/js/admin_manage.js']);
         $this->_tpl->assign('adminList', $this->_model->getAdminList());
-        switch($_GET['action']){
+        switch ($_GET['action']) {
             case 'add':
                 $action = 'add';
                 break;
@@ -86,6 +94,14 @@ class AdminAction extends Action
 
     public function navAction()
     {
+        switch ($_GET['action']) {
+            default:
+            case'show':
+                $this->_tpl->assign('action', 'show');
+                break;
+            case 'add':
+                $this->_tpl->assign('action', 'add');
+        }
     }
 
     public function topAction()
