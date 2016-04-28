@@ -77,12 +77,12 @@ class AdminAction extends Action
     {
         Validate::checkSession();
         //Validate::checkPremission('3','警告，权限不足，您不能管理管理员！');
-        $this->_tpl->assign('title', 'main');
         $this->_tpl->assign('css', ['admin']);
         $this->_tpl->assign('js', ['/js/admin_manage.js']);
         switch ($_GET['action']) {
             case 'add':
                 $action = 'add';
+                $this->_tpl->assign('title', '新增管理员');
                 break;
             case 'update':
                 if (isset($_POST['send'])) {
@@ -94,10 +94,18 @@ class AdminAction extends Action
                         Tool::alertLocation('操作超时', '/admin/admin.php');
                     }
                     unset($_SESSION['token_time']);
-                    $data['id'] = intval($_POST['id']);
-                    $data['admin_pass'] = $_POST['admin_pass'];
+                    if (!$data['id'] = intval($_POST['id'])) {
+                        Tool::alertLocation('操作非法', $_POST['prev_url']);
+                    }
+                    if ($_POST['admin_pass'])
+                        $data['admin_pass'] = $_POST['admin_pass'];
+                    if (($_POST['level']) != '')
+                        $data['level'] = intval($_POST['level']);
+                    if (count($data) == 1) {
+                        Tool::alertLocation('修改成功', $_POST['prev_url']);
+                    }
                     if ($this->_model->modifyAdmin($data) == 1) {
-                        Tool::alertLocation('ac', $_POST['prev_url']);
+                        Tool::alertLocation('修改成功', $_POST['prev_url']);
                     } else {
                         Tool::alertLocation('error', $_POST['prev_url']);
                     }
@@ -114,6 +122,7 @@ class AdminAction extends Action
             default:
             case 'show':
                 $action = 'show';
+                $this->_tpl->assign('title', '管理员列表');
                 $this->_tpl->assign('adminList', $this->_model->getAdminList());
         }
         $this->_tpl->assign('action', $action);
@@ -122,13 +131,18 @@ class AdminAction extends Action
 
     public function navAction()
     {
+        $this->_tpl->assign('css', ['admin']);
+        $this->_tpl->assign('js', ['/js/admin_nav.js']);
+
         switch ($_GET['action']) {
             default:
             case'show':
                 $this->_tpl->assign('action', 'show');
+                $this->_tpl->assign('title', '导航列表');
                 break;
             case 'add':
                 $this->_tpl->assign('action', 'add');
+                $this->_tpl->assign('title', '新增导航');
         }
     }
 

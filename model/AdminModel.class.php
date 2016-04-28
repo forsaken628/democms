@@ -71,10 +71,14 @@ class AdminModel extends Model
         $set = '';
         if (isset($data['admin_pass'])) {
             $pass = sha1($data['admin_pass']);
-            $set .= "admin_pass= \"$pass\"";
+            $set .= " admin_pass= \"$pass\",";
         }
-        $sql = "UPDATE cms_content SET $set WHERE id=\"{$data['id']}\";";
+        if (isset($data['level'])) {
+            $set .= " level= {$data['level']},";
+        }
+        $set = substr($set, 0, -1);
+        $sql = "UPDATE cms_manage SET $set WHERE id={$data['id']};";
         echo $sql;
-        return 1;
+        return $this->aud($sql);
     }
 }

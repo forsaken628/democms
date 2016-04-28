@@ -1,12 +1,12 @@
 {{include file='head.tpl'}}
 <body id="main">
 <div class="map">
-    管理首页 &gt;&gt; 管理员管理 &gt;&gt; <strong id="title">管理员列表</strong>
+    管理首页 &gt;&gt; 管理员管理 &gt;&gt; <strong id="title">{{$title}}</strong>
 </div>
 
 <ol>
-    <li><a href="manage.php?action=show" class="selected">管理员列表</a></li>
-    <li><a href="manage.php?action=add">新增管理员</a></li>
+    <li><a href="manage.php?action=show" >管理员列表</a></li>
+    <li><a href="manage.php?action=add" >新增管理员</a></li>
 </ol>
 {{if $action eq 'show'}}
     <table cellspacing="0">
@@ -37,10 +37,10 @@
     <form method="post" name="add">
         <table cellspacing="0" class="left">
             <tr>
-                <td>用 户 名：<input type="text" name="admin_user" class="text"/> (* 不得小于两位，不得大于20位)</td>
+                <td>用&ensp;户&ensp;名：<input type="text" name="admin_user" class="text"/> (* 不得小于两位，不得大于20位)</td>
             </tr>
             <tr>
-                <td>密　　码：<input type="password" name="admin_pass" class="text"/> (* 不得小于六位)</td>
+                <td>密&emsp;&emsp;码：<input type="password" name="admin_pass" class="text"/> (* 不得小于六位)</td>
             </tr>
             <tr>
                 <td>密码确认：<input type="password" name="admin_notpass" class="text"/> (* 必须同密码一致)</td>
