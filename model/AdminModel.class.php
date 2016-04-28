@@ -19,9 +19,18 @@ class AdminModel extends Model
         }
     }
 
-    public function getAdminList()
+    public function getAdminList($id = null)
     {
-        $sql = "SELECT * FROM cms_manage";
+        if ($id) {
+            $where = 'where id in (';
+            foreach ($id as $item) {
+                $where .= $item . ',';
+            }
+            $where = substr($where, 0, -1) . ')';
+        } else {
+            $where = '';
+        }
+        $sql = "SELECT * FROM cms_manage $where";
         return $this->all($sql);
     }
 
@@ -56,4 +65,8 @@ class AdminModel extends Model
         $sql = "SELECT c.*,n.nav_name,n.nav_info FROM cms_content c JOIN cms_nav n ON c.nav=n.id" . $where;
         return $this->all($sql);
     }
+    public function modifyAdmin(){
+        return 1;
+    }
 }
+

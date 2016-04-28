@@ -55,21 +55,21 @@
 </form>
 {{elseif $action eq 'update'}}
 <form method="post" name="update">
-    <input type="hidden" value="56" name="id"/>
+    <input type="hidden" value="{{$admin->id}}" name="id"/>
     <input type="hidden" value="" id="level"/>
-    <input type="hidden" value="3d4f2bf07dc1be38b20cd6e46949a1071f9d0e3d" name="pass"/>
-    <input type="hidden" value="http://test.demo/CMS11.5/admin/manage.php?action=update&id=67" name="prev_url"/>
+    <input type="hidden" value="{{$pass}}" name="pass"/>
+    <input type="hidden" value="/admin/manage.php?action=update&id={{$admin->id}}" name="prev_url"/>
     <table cellspacing="0" class="left">
         <tr>
-            <td>用户名：<input type="text" name="admin_user" value=admin class="text" readonly="readonly"/></td>
+            <td>用户名：<input type="text" name="admin_user" value="{{$admin->admin_user}}" class="text" readonly="readonly"/></td>
         </tr>
         <tr>
             <td>密　码：<input type="password" name="admin_pass" class="text"/> (* 留空则不修改)</td>
         </tr>
 
         <tr>
-            <td><input type="submit" name="send" value="修改管理员" onclick="return checkUpdateForm();" class="submit"/> [ <a
-                        href="manage.php?action=show">返回列表</a> ]
+            <td><input type="submit" name="send" value="修改管理员" onclick="return checkUpdateForm();" class="submit"/>
+                [ <a href="manage.php?action=show">返回列表</a> ]
             </td>
         </tr>
     </table>

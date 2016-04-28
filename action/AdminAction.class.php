@@ -8,9 +8,12 @@
  */
 class AdminAction extends Action
 {
+    private $_model;
+
     public function __construct($_tpl, $_model = null)
     {
-        parent::__construct($_tpl, new AdminModel());
+        parent::__construct($_tpl);
+        $this->_model = new AdminModel();
     }
 
     public function adminAction()
@@ -61,7 +64,7 @@ class AdminAction extends Action
             case'show':
                 $this->_tpl->assign('action', 'show');
                 $this->_tpl->assign('newsList', $this->_model->getNewsList($_GET['nav']));
-                $this->_tpl->assign('navList', $this->_model->getNavList($_GET['nav']));
+                $this->_tpl->assign('navList', $this->_model->getNavList());
                 break;
             case 'add':
                 $this->_tpl->assign('action', 'add');
@@ -77,16 +80,39 @@ class AdminAction extends Action
         $this->_tpl->assign('title', 'main');
         $this->_tpl->assign('css', ['admin']);
         $this->_tpl->assign('js', ['/js/admin_manage.js']);
-        $this->_tpl->assign('adminList', $this->_model->getAdminList());
         switch ($_GET['action']) {
             case 'add':
                 $action = 'add';
                 break;
             case 'update':
+                if (isset($_POST['send'])) {
+                    if ($_POST['pass'] != $_SESSION['token']) {
+                        Tool::alertLocation('操作非法', '/admin/admin.php');
+                    }
+                    unset($_SESSION['token']);
+                    if ($_SESSION['token_time'] + 5 * 60 < time()) {
+                        Tool::alertLocation('操作超时', '/admin/admin.php');
+                    }
+                    unset($_SESSION['token_time']);
+                    if ($this->_model->modifyAdmin() == 1) {
+                        Tool::alertLocation('ac', $_POST['prev_url']);
+                    } else {
+                        Tool::alertLocation('error', $_POST['prev_url']);
+                    }
+                }
+                $id = intval($_GET['id']);
                 $action = 'update';
+                $admin = $this->_model->getAdminList([$id]);
+                $admin = $admin[0];
+                $_SESSION['token'] = sha1(time() . mt_rand());
+                $_SESSION['token_time'] = time();
+                $this->_tpl->assign('pass', $_SESSION['token']);
+                $this->_tpl->assign('admin', $admin);
                 break;
             default:
+            case 'show':
                 $action = 'show';
+                $this->_tpl->assign('adminList', $this->_model->getAdminList());
         }
         $this->_tpl->assign('action', $action);
         $this->_tpl->display('manage.tpl');
