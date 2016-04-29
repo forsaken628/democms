@@ -52,7 +52,7 @@ class AdminModel extends Model
             $temp['body'][] = $item;
         }
         if (!empty($temp)) {
-            $newsList[] = $temp;
+            $navList[] = $temp;
         }
         return $navList;
     }

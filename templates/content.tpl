@@ -1,11 +1,11 @@
 {{include file='head.tpl'}}
 <body id="main">
 <div class="map">
-    内容管理 &gt;&gt; 查看文档列表 &gt;&gt; <strong id="title">文档列表</strong>
+    内容管理 &gt;&gt; 查看文档列表 &gt;&gt; <strong id="title">{{$title}}</strong>
 </div>
 
 <ol>
-    <li><a href="content.php?action=show" class="selected">文档列表</a></li>
+    <li><a href="content.php?action=show">文档列表</a></li>
     <li><a href="content.php?action=add">新增文档</a></li>
 </ol>
 

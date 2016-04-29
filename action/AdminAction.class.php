@@ -56,18 +56,19 @@ class AdminAction extends Action
     public function contentAction()
     {
         Validate::checkSession();
-        $this->_tpl->assign('title', 'main');
         $this->_tpl->assign('css', ['admin']);
-        $this->_tpl->assign('js', ['../js/admin_content.js', '../ckeditor/ckeditor.js']);
+        $this->_tpl->assign('js', ['/js/admin_content.js', '/ckeditor/ckeditor.js']);
         switch ($_GET['action']) {
             default:
             case'show':
                 $this->_tpl->assign('action', 'show');
+                $this->_tpl->assign('title', '文档列表');
                 $this->_tpl->assign('newsList', $this->_model->getNewsList($_GET['nav']));
                 $this->_tpl->assign('navList', $this->_model->getNavList());
                 break;
             case 'add':
                 $this->_tpl->assign('action', 'add');
+                $this->_tpl->assign('title', '新增文档');
         }
 
         $this->_tpl->display('content.tpl');
